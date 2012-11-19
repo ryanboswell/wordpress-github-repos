@@ -26,7 +26,7 @@
 	 */
 	function rb_github_repos( $atts ) {
 	
-		extract( shortcode_atts( array( 'username' => '' ), $atts ) );
+		extract( shortcode_atts( array( 'username' => '', 'custom_css' => 'false' ), $atts ) );
 		
 		// Check to make sure there is a username set
 		if( ! empty( $username ) ) {
@@ -55,30 +55,32 @@
 	
 			// Check that there was a response, then output the repos
 			if ( $response ) {
-				$output =  '
-	<style type="text/css">
-		.github-repos {
-			margin: 10px;
-			padding: 0px;
-		}
-		.github-repos li {
-			list-style-type: none;
-			margin: 0 0 10px 0;
-			padding: 15px;
-			border: 1px solid transparent;
-			border-left: 1px solid #1e7ce2;
-		}
-		.github-repos li:hover {
-			border: 1px solid #1e7ce2;
-		}
-		.github-repos a {
-			display: block;
-			line-height: 2em;
-			text-decoration: none;
-			font-size: 1.4em;
-			font-weight: bolder;
-		}
-	</style>';
+				if( $custom_css == "false" ) {
+				$output = '
+					<style type="text/css">
+						.github-repos {
+							margin: 10px;
+							padding: 0px;
+						}
+						.github-repos li {
+							list-style-type: none;
+							margin: 0 0 10px 0;
+							padding: 15px;
+							border: 1px solid transparent;
+							border-left: 1px solid #1e7ce2;
+						}
+						.github-repos li:hover {
+							border: 1px solid #1e7ce2;
+						}
+						.github-repos a {
+							display: block;
+							line-height: 2em;
+							text-decoration: none;
+							font-size: 1.4em;
+							font-weight: bolder;
+						}
+					</style>';
+				}
 				$output .= '<ul class="github-repos">';
 				foreach ( $response as $repo ) {
 					$output .= '<li><a href="' . $repo->html_url . '">' . $repo->name . '</a> ' . $repo->description . '</li>';
@@ -93,5 +95,3 @@
 	add_shortcode( 'github_repos', 'rb_github_repos' );
 	
 	
-	
-	function rb_github_css
