@@ -35,9 +35,9 @@
 		if ( ! empty( $args['username'] ) ) {
 
 			// Check for transient just in case
-			//$response = get_transient( 'rb_github_repos' );
-	
-			// No transient set, so get a fresh batch from GitHub
+			$response = wp_cache_get( 'rb_github_repos' );
+
+			// No cache set, so get a fresh batch from GitHub
 			if ( ! $response ) {
 
 				$response = wp_remote_get( 'https://api.github.com/users/' . urlencode( $args['username'] ) . '/repos' );
@@ -48,10 +48,10 @@
 				} else {
 					$response = NULL;
 				}
-	
-				// Save repos array to a transient so we don't overload GitHub's API
-				set_transient( 'rb_github_repos', $response, 21600 );
-	
+
+				// Cache repos array for 6 hours so we don't overload GitHub's API
+				wp_cache_set( 'rb_github_repos', $response, null, 21600 );
+
 			}
 	
 			// Check that there was a response, then output the repos
