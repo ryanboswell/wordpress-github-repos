@@ -3,7 +3,7 @@
   * Plugin Name: WordPress GitHub Repos
   * Plugin URI: https://github.com/ryanboswell/wordpress-github-repos/
   * Description: Extends Shortcake and Shortcake Bakery to add a Github repos shortcode and post element.
-  * Version: 1.0
+  * Version: 2.0
   * Author: Ryan Boswell / MidnightLabs
   * Author URI: http://ryanboswell.com
   * Plugin URI: http://ryanboswell.com
