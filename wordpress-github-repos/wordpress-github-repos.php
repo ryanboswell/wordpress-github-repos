@@ -87,11 +87,11 @@
 					$output .= '<li><a href="' . $repo->html_url . '">' . $repo->name . '</a> ' . $repo->description . '</li>';
 				}
 				$output .= '</ul>';
-	
+				return $output;
 			}
 		}
-		
-		return $output;
+
+		return '';
 	}
 	add_shortcode( 'github_repos', 'rb_github_repos' );
 	
