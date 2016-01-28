@@ -24,23 +24,24 @@
 	 *
 	 * @since 1.0
 	 */
-	function rb_github_repos( $atts ) {
-	
-		extract( shortcode_atts( array( 'username' => '', 'custom_css' => 'false' ), $atts ) );
-		
+	function rb_github_repos( $args ) {
+		$defaults = array(
+			'username' => '',
+			'custom_css' => 'false'
+		);
+		wp_parse_args( $args, $defaults );
+
 		// Check to make sure there is a username set
-		if( ! empty( $username ) ) {
-	
+		if ( ! empty( $args['username'] ) ) {
+
 			// Check for transient just in case
 			//$response = get_transient( 'rb_github_repos' );
 	
 			// No transient set, so get a fresh batch from GitHub
 			if ( ! $response ) {
-	
-				$response = wp_remote_post( 'https://api.github.com/users/' . $username . '/repos',
-											array( 'method' => 'GET' )
-											);
-	
+
+				$response = wp_remote_get( 'https://api.github.com/users/' . urlencode( $args['username'] ) . '/repos' );
+
 				// Check to make sure GitHub didn't give an error
 				if ( $response['response']['message'] == 'OK' ) {
 					$response = json_decode( $response['body'] );
@@ -55,7 +56,7 @@
 	
 			// Check that there was a response, then output the repos
 			if ( $response ) {
-				if( $custom_css == "false" ) {
+				if( $args['custom_css'] == 'false' ) {
 				$output = '
 					<style type="text/css">
 						.github-repos {
