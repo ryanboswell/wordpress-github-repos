@@ -5,16 +5,16 @@
  * Description: A simple WordPress plugin that adds a shortcode to WordPress to allow you to list your GitHub repos on a page or in a post. Just use: [github_repos username="YOUR_GITHUB_USERNAME"]
  * Version: 1.0.0
  * Author: Ryan Boswell / Ambit Studios
- * Author URI: http://ryanboswell.com 
+ * Author URI: http://ryanboswell.com
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the
  * GNU General Public License for more details.
  *
  */
@@ -53,7 +53,7 @@
 				wp_cache_set( 'rb_github_repos', $response, null, 21600 );
 
 			}
-	
+
 			// Check that there was a response, then output the repos
 			if ( $response ) {
 				if( $args['custom_css'] == 'false' ) {
@@ -80,7 +80,8 @@
 							font-size: 1.4em;
 							font-weight: bolder;
 						}
-					</style>';
+					</style>
+					';
 				}
 				$output .= '<ul class="github-repos">';
 				foreach ( $response as $repo ) {
@@ -94,5 +95,3 @@
 		return '';
 	}
 	add_shortcode( 'github_repos', 'rb_github_repos' );
-	
-	
