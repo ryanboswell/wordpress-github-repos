@@ -43,7 +43,7 @@
 				$response = wp_remote_get( 'https://api.github.com/users/' . urlencode( $args['username'] ) . '/repos' );
 
 				// Check to make sure GitHub didn't give an error
-				if ( $response['response']['message'] == 'OK' ) {
+				if ( ( $response['response']['message'] == 'OK' ) && ! empty( $response['body'] ) ) {
 					$response = json_decode( $response['body'] );
 				} else {
 					$response = NULL;
